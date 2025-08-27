@@ -1,14 +1,14 @@
 name: Continuous Persistent VPS
- 
+
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Every 6 hours
+    - cron: '0 0 */28 * *'  # كل 28 يوم
   workflow_dispatch:
  
 jobs:
   vps-session:
     runs-on: ubuntu-latest
-    timeout-minutes: 350  # Just under 6 hours
+    timeout-minutes: 40320  # 28 يوم (بالدقائق)
  
     steps:
       - name: Checkout repo
@@ -76,7 +76,7 @@ jobs:
           cat $HOME/.tmate.sock/ssh
  
       - name: Sleep to keep VPS alive
-        run: sleep 21600  # 6 hours
+        run: sleep 2419200  # 28 يوم (بالثواني)
  
       - name: Backup VPS data and tailscale state
         run: |
